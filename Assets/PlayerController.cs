@@ -9,13 +9,12 @@ public class PlayerController : MonoBehaviour
     public KeyCode downKey = KeyCode.S;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Start");
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         // transform.position = transform.position + Vector3.up;         to alternatywa +=

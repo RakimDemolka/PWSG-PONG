@@ -65,10 +65,35 @@ public class BallController : MonoBehaviour
         newVelocityWithOffset += new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
         rb2D.velocity = newVelocityWithOffset.normalized * speed;
         vel = rb2D.velocity;
+
     }
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Czy collision ma GetComponent<PowerUp>()?
+        // Jeœli tak, to wywo³aj SpeedUpBall() na tym komponencie
+        // Jeœli nie, to nic nie rób
+
+      
+
+        PowerUP powerup = collision.gameObject.GetComponent<PowerUP>();
+
+        if (powerup != null)
+        {
+            powerup.SpeedUpBall(this);
+            return;
+
+        }
+
+        PowerUPcos powerupcos = collision.gameObject.GetComponent<PowerUPcos>();
+
+        if (powerupcos != null)
+        {
+            powerupcos.SizeUp(this);
+            return;
+
+        }
+
         if (transform.position.x > 0)
         { 
             print("Left Player +1");
@@ -79,6 +104,11 @@ public class BallController : MonoBehaviour
             print("Right Player +1");
             scoreMenager.IncrementRightPlayerScore();
         }
+
+    
+
+
+
         ResetBall();
     }
 
